@@ -1,6 +1,4 @@
-package studentgrade;
-
-public class Student implements Comparable {
+public class Student {
 
     private String firstName;
     private String lastName;
@@ -23,7 +21,7 @@ public class Student implements Comparable {
     }
 
     public void setLetterGrade(char letterGrade) {
-       this.letterGrade = letterGrade;
+        this.letterGrade = letterGrade;
     }
 
     public String getStatus() {
@@ -88,14 +86,12 @@ public class Student implements Comparable {
     }
 
     public void setAverage(double average) {
-        
+
         this.average = average;
     }
-    
-    
 
     public double computeAverage() {
-        return (grade1 + grade2 + grade3) / 3;
+        return (grade1 + grade2 + grade3) / 3.0;
     }
 
     public void computeStatus() {
@@ -105,26 +101,18 @@ public class Student implements Comparable {
             setStatus("Passing");
         }
     }
-    
-    public void  computeLetterGrade(){
-         if (computeAverage()  >= 90) {
+
+    public void computeLetterGrade() {
+        if (computeAverage() >= 90) {
             letterGrade = 'A';
-        } else if (computeAverage()  >= 80) {
+        } else if (computeAverage() >= 80) {
             letterGrade = 'B';
-        } else if (computeAverage()  >= 70) {
+        } else if (computeAverage() >= 70) {
             letterGrade = 'C';
-        } else if (computeAverage()  >= 60) {
+        } else if (computeAverage() >= 60) {
             letterGrade = 'D';
         } else {
             letterGrade = 'F';
         }
-}
-    
-    
-
-    @Override
-    public int compareTo(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }
