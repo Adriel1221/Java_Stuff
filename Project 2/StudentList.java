@@ -1,5 +1,3 @@
-package studentgrade;
-
 import java.io.File;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -15,10 +13,9 @@ import java.sql.*;
 
 public class StudentList {
 
-    ArrayList<String> read = new ArrayList<String>();
+    
     ArrayList<Student> students = new ArrayList<Student>();
-    private java.io.File file;
-    ArrayList<String> array = new ArrayList<String>();
+    private File file;
     private String routeDB;
 
     public void readStudents() throws Exception {
@@ -27,11 +24,12 @@ public class StudentList {
         double grade3 = 0;
 
         JFileChooser filechooser = new JFileChooser();
+        filechooser.setDialogTitle("Chose Original Document");
         if (filechooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 
             File f = filechooser.getSelectedFile();
             Scanner input = new Scanner(f);
-
+            
             while (input.hasNext()) {
 
                 String line = input.next();
@@ -55,13 +53,14 @@ public class StudentList {
                     grade3 = 0;
 
                 }
-
+                
+                
                 Student student = new Student(values[0], values[1]);
                 student.setGrade1(grade1);
                 student.setGrade2(grade2);
                 student.setGrade3(grade3);
                 students.add(student);
-
+                
             }
             input.close();
         } else {
@@ -78,6 +77,7 @@ public class StudentList {
 
         javax.swing.JFileChooser jF1 = new javax.swing.JFileChooser();
         String route;
+        jF1.setDialogTitle("Chose File to Write");
         try {
             if (jF1.showSaveDialog(null) == jF1.APPROVE_OPTION) {
                 route = jF1.getSelectedFile().getAbsolutePath();
@@ -97,13 +97,13 @@ public class StudentList {
                         
                     while (resultSet.next()) {
                         output.print(resultSet.getString(1) + "\t");
-                        output.print(resultSet.getString(2) + "\t");
-                        output.print(resultSet.getDouble(3) + "\t");
-                        output.print(resultSet.getDouble(4) + "\t");
-                        output.print(resultSet.getDouble(5)+"\t");
-                        output.print(resultSet.getDouble(6)+"\t");
-                        output.print(resultSet.getString(7)+"\t");
-                        output.println(resultSet.getString(8)+"\t");
+                        output.print(resultSet.getString(2) + "\t\t");
+                        output.print(resultSet.getDouble(3) + "\t\t");
+                        output.print(resultSet.getDouble(4) + "\t\t");
+                        output.print(resultSet.getDouble(5)+"\t\t");
+                        output.print(resultSet.getDouble(6)+"\t\t");
+                        output.print(resultSet.getString(7)+"\t\t");
+                        output.println(resultSet.getString(8)+"\t\t");
 
                     }
                     output.close();
@@ -119,9 +119,10 @@ public class StudentList {
 
     public void saveStudentsToDB() throws SQLException {
         javax.swing.JFileChooser jF1 = new javax.swing.JFileChooser();
-
+        jF1.setDialogTitle("Choose Data Base");
         if (jF1.showSaveDialog(null) == jF1.APPROVE_OPTION) {
             routeDB = jF1.getSelectedFile().getAbsolutePath();
+            System.out.println(routeDB);
 
             Connection connection = DriverManager.getConnection("jdbc:ucanaccess://" + routeDB);
             System.out.println("Database connected");
@@ -139,13 +140,6 @@ public class StudentList {
 
             ResultSet resultSet = statement.executeQuery("select firstName, lastName, Grade1, Grade2, Grade3, Average, Status, LetterGrade from StudentsTbl");
 
-            System.out.println("Name\tLast\tGrade1\tGrade2\tGrade3");
-
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString(1) + "\t" + resultSet.getString(2) + "\t"
-                        + resultSet.getDouble(3) + "\t" + resultSet.getDouble(4) + "\t" + resultSet.getDouble(5));
-
-            }
             connection.close();
         }
     }
@@ -153,11 +147,12 @@ public class StudentList {
     public void writeSortedStudents() {
         javax.swing.JFileChooser jF1 = new javax.swing.JFileChooser();
         String route;
+        jF1.setDialogTitle("Choose File to Sort");
         try {
             if (jF1.showSaveDialog(null) == jF1.APPROVE_OPTION) {
                 route = jF1.getSelectedFile().getAbsolutePath();
                 File file = new java.io.File(route);
-
+                
                 if (file.exists()) {
                     PrintWriter output = new java.io.PrintWriter(file);
 
@@ -172,13 +167,13 @@ public class StudentList {
                     
                      while (resultSet.next()) {
                         output.print(resultSet.getString(1) + "\t");
-                        output.print(resultSet.getString(2) + "\t");
-                        output.print(resultSet.getDouble(3) + "\t");
-                        output.print(resultSet.getDouble(4) + "\t");
-                        output.print(resultSet.getDouble(5)+"\t");
-                        output.print(resultSet.getDouble(6)+"\t");
-                        output.print(resultSet.getString(7)+"\t");
-                        output.println(resultSet.getString(8)+"\t");
+                        output.print(resultSet.getString(2) + "\t\t");
+                        output.print(resultSet.getDouble(3) + "\t\t");
+                        output.print(resultSet.getDouble(4) + "\t\t");
+                        output.print(resultSet.getDouble(5)+"\t\t");
+                        output.print(resultSet.getDouble(6)+"\t\t");
+                        output.print(resultSet.getString(7)+"\t\t");
+                        output.println(resultSet.getString(8)+"\t\t");
 
                     }
                     
