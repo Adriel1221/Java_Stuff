@@ -1,0 +1,40 @@
+public class selectionSort {
+    
+    public static void main(String[] args) {
+        int [] data =  new int[10];
+        
+        for (int i = 0; i < data.length; i++){
+            data[i] = (int )(Math.random() * 50 + 1);
+            System.out.print(data[i]+" ");
+        }
+        
+        System.out.println("");
+        
+        selectionSort(data);
+        
+        for (int i = 0; i < data.length; i++){
+            System.out.print(data[i]+ " ");
+        }
+    }
+    
+
+    private static void selectionSort(int[] data){
+        int startScan, minIndex = 0, minValue;
+        
+        for (startScan = 0; startScan < data.length; startScan++){
+            
+            minValue = startScan;
+            minValue = data[startScan];
+            
+            for ( int index = startScan + 1; index < data.length; index ++){
+                if (data[index] < minValue){
+                    minValue = data[index];
+                    minIndex = index;
+                }
+            }
+            
+            data[minIndex] = data[startScan];
+            data[startScan] = minValue;
+        }
+    }
+}
