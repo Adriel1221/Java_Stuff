@@ -1,3 +1,5 @@
+package student;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -60,7 +62,7 @@ public class StudentList {
                 student.setGrade2(grade2);
                 student.setGrade3(grade3);
                 students.add(student);
-                
+                System.out.println(line);
             }
             input.close();
         } else {
@@ -117,7 +119,7 @@ public class StudentList {
 
     }
 
-    public void saveStudentsToDB() throws SQLException {
+    public void saveStudentsToDB() throws Exception {
         javax.swing.JFileChooser jF1 = new javax.swing.JFileChooser();
         jF1.setDialogTitle("Choose Data Base");
         if (jF1.showSaveDialog(null) == jF1.APPROVE_OPTION) {
@@ -163,17 +165,27 @@ public class StudentList {
 
                     ResultSet resultSet = statement.executeQuery("select firstName, lastName, Grade1, Grade2, Grade3, Average, Status, LetterGrade from StudentsTbl order by Average asc;");
 
-                    output.println("Name\tLast\tGrade1\tGrade2\tGrade3");
+                    output.printf("%-13s", "Name");
+                    output.printf("%10s", "Grade1");
+                    output.printf("%10s", "Grade3");
+                    output.printf("%10s", "Grade4");
+                    output.printf("%10s", "Average");
+                    output.printf("%10s", "Status");
+                    output.printf("%15s", "Letter Garde");
+                    output.println();
+                    output.println();
+                    
                     
                      while (resultSet.next()) {
-                        output.print(resultSet.getString(1) + "\t");
-                        output.print(resultSet.getString(2) + "\t\t");
-                        output.print(resultSet.getDouble(3) + "\t\t");
-                        output.print(resultSet.getDouble(4) + "\t\t");
-                        output.print(resultSet.getDouble(5)+"\t\t");
-                        output.print(resultSet.getDouble(6)+"\t\t");
-                        output.print(resultSet.getString(7)+"\t\t");
-                        output.println(resultSet.getString(8)+"\t\t");
+                        output.printf("%-1s",resultSet.getString(1)+" ");
+                        output.printf("%-1s",resultSet.getString(2)+" \t ");
+                        output.printf("%-10.2f",resultSet.getDouble(3));
+                        output.printf("%-10.2f",resultSet.getDouble(4));
+                        output.printf("%-10.2f",resultSet.getDouble(5));
+                        output.printf("%-10.2f",resultSet.getDouble(6));
+                        output.print(resultSet.getString(7));
+                        output.printf("%8s",resultSet.getString(8));
+                        output.println();
 
                     }
                     
@@ -190,51 +202,48 @@ public class StudentList {
 
     }
 
-    public void findStudent() {
+    
+    public void findStudentn()throws Exception {
         String name = "";
         String lastName = "";
+        String answer = "";
         Scanner userInput = new Scanner(System.in);
+        boolean condition = false;
 
         do {
             System.out.println("If you don't want to continue type end");
             System.out.println("Please enter the first name of the student you are looking for: ");
             name = userInput.nextLine();
             if (name.equals("end")) {
+                condition = true;
                 break;
             }
             System.out.println("Please enter the last name of the student you are looking for: ");
             lastName = userInput.nextLine();
-
-            try {
-                if (!name.equals("end") || !lastName.equals("end")) {
-
-                    Connection connection = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\jose.aparicio002\\Documents\\Students.accdb");
-                    System.out.println("Database connected");
-
-                    Statement statement = connection.createStatement();
-
-                    ResultSet resultSet = statement.executeQuery("select firstName, lastName, Grade1, Grade2, Grade3, Average, Status, LetterGrade from StudentsTbl");
-                    System.out.println("Name\tLast\tGrade1\tGrade2\tGrade3");
-                    while (resultSet.next()) {
-
-                        if (resultSet.getString(1).equals(name) && resultSet.getString(2).equals(lastName)) {
-                            System.out.println("Student found!");
-                            System.out.println(resultSet.getString(1) + "\t" + resultSet.getString(2) + "\t"
-                                    + resultSet.getDouble(3) + "\t" + resultSet.getDouble(4) + "\t" + resultSet.getDouble(5));
-                            break;
-                        } else {
-                            System.out.println("Student not found!");
-                        }
-                    }
-
-                    connection.close();
-
-                }
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            Connection connection = DriverManager.getConnection("jdbc:ucanaccess://"+routeDB);
+            System.out.println("Database connected");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select firstName, lastName, Grade1, Grade2, Grade3, Average, Status, LetterGrade from StudentsTbl");
+            
+            if (resultSet.getString(1).equals(name) && resultSet.getString(2).equals(lastName)) {
+                        System.out.println("Student found!");
+                        break;
             }
-        } while (!name.equals("end") || !lastName.equals("end"));
+             if (!resultSet.getString(1).equals(name) && !resultSet.getString(2).equals(lastName)){
+                System.out.println("Student not found");
+            }
+            
+            System.out.println("Want to find another student");
+            answer = userInput.nextLine();
+            if(!answer.toUpperCase().equals("yes")){
+                condition = true;
+            }
+            else 
+                condition = false;
+            connection.close();
+
+
+        } while (condition == false);
     }
 
 }
