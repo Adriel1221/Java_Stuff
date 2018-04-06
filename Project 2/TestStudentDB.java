@@ -1,14 +1,14 @@
-import java.sql.*;
+package student;
 
-public class TestStudentDB {
-  public static void main(String[] args) throws SQLException, Exception {
+public class TestStudent {
+  public static void main(String[] args) throws Exception, Exception {
       StudentList studentList = new StudentList();
 
 	studentList.readStudents();
 	studentList.saveStudentsToDB();    
         studentList.writeStudents();
         studentList.writeSortedStudents();
-	studentList.findStudent();
+	studentList.findStudentn();
 
   }
 }
