@@ -8,7 +8,7 @@ public class TestStudent {
 	studentList.saveStudentsToDB();    
         studentList.writeStudents();
         studentList.writeSortedStudents();
-	studentList.findStudentn();
+	studentList.findStudent();
 
   }
 }
