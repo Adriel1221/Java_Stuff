@@ -203,7 +203,7 @@ public class StudentList {
     }
 
     
-    public void findStudentn()throws Exception {
+    public void findStudent()throws Exception {
         String name = "";
         String lastName = "";
         String answer = "";
@@ -211,6 +211,7 @@ public class StudentList {
         boolean condition = false;
 
         do {
+            System.out.println(routeDB);
             System.out.println("If you don't want to continue type end");
             System.out.println("Please enter the first name of the student you are looking for: ");
             name = userInput.nextLine();
@@ -223,8 +224,13 @@ public class StudentList {
             Connection connection = DriverManager.getConnection("jdbc:ucanaccess://"+routeDB);
             System.out.println("Database connected");
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select firstName, lastName, Grade1, Grade2, Grade3, Average, Status, LetterGrade from StudentsTbl");
+            ResultSet resultSet = statement.executeQuery("select firstName, lastName, Status from StudentsTbl"
+                                                         +" where FirstName = '" + name + "'"
+                                                          +" and LastName = '" + lastName + "'");
             
+            
+            //System.out.println(resultSet.getString(1)+resultSet.getString(2));
+            while(resultSet.next()){
             if (resultSet.getString(1).equals(name) && resultSet.getString(2).equals(lastName)) {
                         System.out.println("Student found!");
                         break;
@@ -232,18 +238,18 @@ public class StudentList {
              if (!resultSet.getString(1).equals(name) && !resultSet.getString(2).equals(lastName)){
                 System.out.println("Student not found");
             }
-            
+            }
             System.out.println("Want to find another student");
             answer = userInput.nextLine();
-            if(!answer.toUpperCase().equals("yes")){
-                condition = true;
+            if(answer.toLowerCase().equals("yes")){
+                condition = false;
             }
             else 
-                condition = false;
+                condition = true;
             connection.close();
 
-
-        } while (condition == false);
+            System.out.println(condition);
+        } while (!condition);
     }
 
 }
