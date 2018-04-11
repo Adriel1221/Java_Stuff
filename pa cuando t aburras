@@ -1,0 +1,186 @@
+import java.util.*;
+public class Rock
+{
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner(System.in);
+        Random rn = new Random();
+        
+        String response = " ";
+        
+        do
+        {
+            System.out.println("Let's play: ");
+            System.out.println("Language: \n1.English\n2.Spanish");
+            int language = in.nextInt();
+            
+                if (language==1)
+                    {
+                        System.out.println("Choose from these options: \n1.Rock\n2.Paper\n3.Scissors\n4.Bye");
+                        int answer = in.nextInt();
+                        int choice = 1 + rn.nextInt(3);
+            
+                            switch (answer)
+                            {
+                                case 1:
+                                    if(choice==2)
+                                        {
+                                            System.out.println("Your answer: " + answer);
+                                            System.out.println("My answer: " + choice);
+                                            System.out.println("You Lose!");
+                                        }
+                                    else if (choice==3)
+                                        {
+                                            System.out.println("Your answer: " + answer);
+                                            System.out.println("My answer: " + choice);
+                                            System.out.println("You Win!");
+                                        }
+                                    else if (choice==1)
+                                        {
+                                            System.out.println("Your answer: " + answer);
+                                            System.out.println("My answer: " + choice);
+                                            System.out.println("Tie!");
+                                        }
+                                    break;
+                                case 2:
+                                    if(choice==1)
+                                        {
+                                            System.out.println("Your answer: " + answer);
+                                            System.out.println("My answer: " + choice);
+                                            System.out.println("You Win!");
+                                        }
+                                    else if(choice==2)
+                                        {
+                                            System.out.println("Your answer: " + answer);
+                                            System.out.println("My answer: " + choice);
+                                            System.out.println("Tie!");
+                                        }
+                                    else if(choice==3)
+                                        {
+                                            System.out.println("Your answer: " + answer);
+                                            System.out.println("My answer: " + choice);
+                                            System.out.println("You Lose!");
+                                        }
+                                    break;
+                                case 3:
+                                    if(choice==1)
+                                        {
+                                            System.out.println("Your answer: " + answer);
+                                            System.out.println("My answer: " + choice);
+                                            System.out.println("You Lose!");
+                                        }
+                                    else if(choice==2)
+                                        {
+                                            System.out.println("Your answer: " + answer);
+                                            System.out.println("My answer: " + choice);
+                                            System.out.println("You win!");
+                                        }
+                                    else if(choice==3)
+                                        {
+                                            System.out.println("Your answer: " + answer);
+                                            System.out.println("My answer: " + choice);
+                                            System.out.println("Tie!");
+                                        }
+                                    break;
+                            }
+                        if(answer==4)
+                            {
+                                System.out.println("Bye!");
+                                break;
+                            }
+            
+                        System.out.println("Do you wanna go again?");
+                        response = in.next();
+           
+                            if(response.toUpperCase().equals("NO"))
+                                {
+                                    System.out.println("Bye");
+                                }
+                    }
+        
+                else if(language==2)
+                    {
+                        System.out.println("Escoge entre estas opciones: \n1.Piedra\n2.Papel\n3.Tijeras\n4.Adios");
+                        int answer = in.nextInt();
+                        int choice = 1 + rn.nextInt(3);
+            
+                            switch (answer)
+                                {
+                                    case 1:
+                                        if(choice==2)
+                                            {
+                                                System.out.println("Tu respuesta: " + answer);
+                                                System.out.println("Mi respuesta: " + choice);
+                                                System.out.println("Perdiste!");
+                                            }
+                                        else if (choice==3)
+                                            {
+                                                System.out.println("Tu respuesta: " + answer);
+                                                System.out.println("Mi respuesta: " + choice);
+                                                System.out.println("Ganaste!");
+                                            }
+                                        else if (choice==1)
+                                            {
+                                                System.out.println("Tu respuesta: " + answer);
+                                                System.out.println("Mi respuesta: " + choice);
+                                                System.out.println("Empate!");
+                                            }
+                                        break;
+                                    case 2:
+                                        if(choice==1)
+                                            {
+                                                System.out.println("Tu respuesta: " + answer);
+                                                System.out.println("Mi respuesta: " + choice);
+                                                System.out.println("Ganaste!");
+                                            }
+                                        else if(choice==2)
+                                            {
+                                                System.out.println("Tu respuesta: " + answer);
+                                                System.out.println("Mi respuesta: " + choice);
+                                                System.out.println("Empate!");
+                                            }
+                                        else if(choice==3)
+                                            {
+                                                System.out.println("Tu respuesta: " + answer);
+                                                System.out.println("Mi respuesta: " + choice);
+                                                System.out.println("Perdiste!");
+                                            }
+                                        break;
+                                    case 3:
+                                        if(choice==1)
+                                            {
+                                                System.out.println("Tu respuesta: " + answer);
+                                                System.out.println("Mi respuesta: " + choice);
+                                                System.out.println("Perdiste!");
+                                            }
+                                        else if(choice==2)
+                                            {
+                                                System.out.println("Tu respuesta: " + answer);
+                                                System.out.println("Mi respuesta: " + choice);
+                                                System.out.println("Ganaste!");
+                                            }
+                                        else if(choice==3)
+                                            {
+                                                System.out.println("Tu respuesta: " + answer);
+                                                System.out.println("Mi respuesta: " + choice);
+                                                System.out.println("Empate!");
+                                            }
+                                        break;
+                                }
+                            if(answer ==4)
+                                {
+                                    System.out.println("Adios!");
+                                    break;
+                                } 
+            
+                        System.out.println("Quieres ir de nuevo?");
+                        response = in.next();
+           
+                        if(response.toUpperCase().equals("NO"))
+                            {
+                                System.out.println("Adios");
+                            }  
+                    }
+        }while(response.toUpperCase().equals("YES")||response.toUpperCase().equals("SI"));
+    }       
+}
