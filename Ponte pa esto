@@ -1,0 +1,88 @@
+import java.util.*;
+public class Rock
+{
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner(System.in);
+        Random rn = new Random();
+        
+        String response = " ";
+        
+        do
+        {
+            System.out.println("Let's play: ");
+            System.out.println("Choose from these options: \n1.Rock\n2.Paper\n3.Scissors\n4.Bye");
+            int answer = in.nextInt();
+            int choice = 1 + rn.nextInt(3);
+            
+            if(answer==1 && choice==2)
+            {
+                System.out.println("Your answer: " + answer);
+                System.out.println("My answer: " + choice);
+                System.out.println("You Lose!");
+            }
+            else if(answer==1 && choice==3)
+            {
+                System.out.println("Your answer: " + answer);
+                System.out.println("My answer: " + choice);
+                System.out.println("You Win!");
+            }
+            else if(answer==1 && choice==1)
+            {
+                System.out.println("Your answer: " + answer);
+                System.out.println("My answer: " + choice);
+                System.out.println("Tie!");
+            }
+            else if(answer==2 && choice==1)
+            {
+                System.out.println("Your answer: " + answer);
+                System.out.println("My answer: " + choice);
+                System.out.println("You Win!");
+            }
+            else if(answer==2 && choice==2)
+            {
+                System.out.println("Your answer: " + answer);
+                System.out.println("My answer: " + choice);
+                System.out.println("Tie!");
+            }
+            else if(answer==2 && choice==3)
+            {
+                System.out.println("Your answer: " + answer);
+                System.out.println("My answer: " + choice);
+                System.out.println("You Lose!");
+            }
+            else if(answer==3 && choice==1)
+            {
+                System.out.println("Your answer: " + answer);
+                System.out.println("My answer: " + choice);
+                System.out.println("You Lose!");
+            }
+            else if(answer==3 && choice==2)
+            {
+                System.out.println("Your answer: " + answer);
+                System.out.println("My answer: " + choice);
+                System.out.println("You win!");
+            }
+            else if(answer==3 && choice==3)
+            {
+                System.out.println("Your answer: " + answer);
+                System.out.println("My answer: " + choice);
+                System.out.println("Tie!");
+            }
+            else if(answer==4)
+            {
+                System.out.println("Bye!");
+                break;
+            }
+            
+            System.out.println("Do you wanna go again?");
+            response = in.next();
+           
+            if(response.toUpperCase().equals("NO"))
+            {
+                System.out.println("Bye");
+            }
+        }while(response.toUpperCase().equals("YES"));
+           
+    }
+}
